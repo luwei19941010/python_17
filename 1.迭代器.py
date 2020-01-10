@@ -4,6 +4,7 @@
 v1=[11,22,33,44,55,66]
 # v2=iter(v1)
 v2=v1.__iter__()
+print(type(v2))
 print(v1.__iter__().__next__())
 # print(type(v2))
 #

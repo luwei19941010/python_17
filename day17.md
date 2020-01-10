@@ -184,3 +184,41 @@ for i in val:
 总结：函数中如果存在yield，那么函数就是一个生成器函数，调用生成器函数会返回一个生成器。生成器只有被for循环时，生成器函数内部的函数才会执行，每次循环都会获取yield返回的值。 
 
  
+
+```
+import time
+def func():
+    cursor=0
+    while True:
+        f=open('生成器',mode='r',encoding='utf-8')
+        l = []
+        f.seek(cursor)
+        for i in range(10):
+            date=f.readline()
+            if not date:
+                return
+            l.append(date.strip())
+        cursor = f.tell()
+        # print(cursor)
+        # time.sleep(1)
+        f.close()
+        for i in l:
+            yield i
+
+val=func()
+for i in val:
+    print(i)
+```
+
+
+
+
+
+总结：
+
+迭代器：对可迭代对象中的元素进行逐一获取，具有__ next __()方法，用于一个一个获取数据
+
+迭代对象：可以被for循环，具有__ iter __()方法且这个方法将返回一个迭代器（或者生成器）
+
+生成器：函数具有yield。调用函数返回一个生成器，循环生成器，则函数内部代码才会被执行。注意：生成器也是一个迭代器也是一种特殊可迭代对象。因为__ next __()，__ iter __()
+
